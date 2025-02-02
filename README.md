@@ -5,6 +5,17 @@ Ett intensivt spel för två spelare där strategi och snabba reflexer avgör ve
 ## Länk till spelet
 [Testa spelet](https://oop-p5-game.vercel.app/)
 
+## Utveckling
+
+Detta spel är utvecklat med [p5.js](https://p5js.org/), ett JavaScript-bibliotek för att skapa interaktiva upplevelser, och [TypeScript](https://www.typescriptlang.org/), ett språk som bygger på JavaScript genom att addera statisk typning.
+
+## Medutvecklare ❤️
+
+*   Wilma
+*   Tomas
+*   Ahmad
+*   Elnur
+
 ## Spelbeskrivning
 
 I Furious Snake tävlar två spelare mot varandra. Varje spelare styr en orm med målet att överleva och nå mållinjen före sin motståndare. Samtidigt måste de undvika faror och samla bonusar för att öka sina chanser att vinna.
@@ -50,10 +61,3 @@ I Furious Snake tävlar två spelare mot varandra. Varje spelare styr en orm med
 *   **Resurshantering:** Balansera risken att samla power-ups mot att förlora liv.
 *   **Positionering:** Planera din rutt för att undvika spöket medan du jagar power-ups.
 *   **Timing:** Beräkna när det är värt att ta skada för att nå bättre position eller få extra poäng.
-
-## Medutvecklare ❤️
-
-*   Wilma
-*   Tomas
-*   Ahmad
-*   Elnur
