@@ -1,50 +1,63 @@
-# Slutprojektet
+# Furious Snake
 
-Välkommen till den förinställda kodbasen för slutprojektet.
-Se filen [Sketch](./src/sketch.ts) och [Game](./src/game.ts) filerna för hur ni bör börja skriva er kod!
+Ett intensivt spel för två spelare där strategi och snabba reflexer avgör vem som vinner. Spelarna styr varsin orm i en värld fylld med faror och bonusar.
 
-Kom ihåg att använda git!
-
-Projektet använder sig av [Typescript](https://www.typescriptlang.org/) och [p5.js](https://p5js.org/). Det är varmt rekommenderat att ni läser på om dessa två teknologier innan ni börjar skriva kod.
-
-OBS: Undvik [DOM funktionerna i p5.js](https://p5js.org/reference/#group-DOM) eftersom de **inte** är canvasspecifika och kommer inte fungera som ni förväntar er.
-
-Förtydligande: 
-
-I p5.js finns det funktioner som låter att manipulera DOM-element (t.ex. createDiv() eller createButton()), men dessa funktioner skapar element utanför canvasen. Arbetar man med grafik eller animationer som är canvas-baserade, blir det ofta rörigt eller ologiskt att blanda DOM-element med canvas-renderingen.
+## Länk till spelet
+[Testa spelet](https://oop-p5-game.vercel.app/)
 
 ## Utveckling
 
-### Installation
+Detta spel är utvecklat med [p5.js](https://p5js.org/), ett JavaScript-bibliotek för att skapa interaktiva upplevelser, och [TypeScript](https://www.typescriptlang.org/), ett språk som bygger på JavaScript genom att addera statisk typning.
 
-Först behöver ni köra kommandot `npm install` för att installera nödvändiga moduler (p5, typescript, etc).
+## Medutvecklare ❤️
 
-### Starta projektet
+*   Wilma
+*   Tomas
+*   Ahmad
+*   Elnur
 
-Kör kommandot `npm run dev` för att starta projektet och se det live i din webbläsare!
+## Spelbeskrivning
 
-### Debugger
+I Furious Snake tävlar två spelare mot varandra. Varje spelare styr en orm med målet att överleva och nå mållinjen före sin motståndare. Samtidigt måste de undvika faror och samla bonusar för att öka sina chanser att vinna.
 
-Det är starkt rekommenderat att ni använder debug-verktyget i VSCode för att hitta och lösa problem. Metoden vi primärt har använt tidigare är att skriva `console.log` men vi kan bli mer effektiva!
+### Grundläggande spelmekanik
 
-Debuggern låter er stanna programmet och stega rad för rad samtidigt som ni kan titta på vad variablerna innehåller. Det är speciellt användbart när ni arbetar med funktioner som anropas 60 gånger per sekund - console overload otherwise... 🤯
+*   **Ormens livskraft och egenskaper:**
+    *   Startliv: 3 hjärtan
+    *   Minimalt liv: 1 hjärta (0 hjärtan = Game Over)
+    *   Maximalt liv: 10 hjärtan
+    *   Egenskap: Fast form och längd på ormen
+    *   Poängsystem: Spelare tjänar poäng så länge den håller sig vid liv. När spelaren tar en stjärna ökar poängen x2 under 10 sekunder.
 
-#### Starta Debuggern
+*   **Spelomgångens längd:**
+    *   Spelet har en fast bana med en startposition för ormarna och en mållinje. Spelet varar tills dess att en av spelarna gått i mål, eller att en av spelarna förlorar alla sina liv och får Game Over, eller går in i ett Tetrishinder eller i sidoväggen och får Game Over.
 
-För att starta debuggern tycker du på `F5` eller via play-knappen i "ActionBaren", se dock till att du har startat projektet innan (`npm run dev`). Ett nytt fönster kommer att öppnas som behöver användas för att få koden att stanna vid utsatta debugg-punkter.
+*   **Spelstart:**
+    *   Spelet börjar när spelarna valt nivå i startmenyn (genom att klicka på Easy/Medium/Hard) och sedan klickat på Start Game-knappen. De kommer då vidare till en nedräkning från 3 för att kunna förbereda sig och fokusera.
 
-### Potentiella problem
+*   **Spelavslut:**
+    *   När en spelare får Game Over genom att förlora alla sina liv, eller får Game Over genom att gå in i en sidovägg eller ett Tetrishinder.
 
-Versionen av p5.js är 1.5.0 medan senaste version av p5 typerna endast är uppdaterad till 1.4.3. Detta skulle kunna orsaka problem och det kan vara så att ni hittar något i p5's dokumentation som inte finns tillgängligt i detta projektet - dock osannolikt.
+### Vinnare
 
-Typings för de globala variablerna relaterat till p5.sound fungerar tyvärr inte - exempel finns för hur ni kan kringgå detta. Se [loadSound funktionen](global.d.ts) för hur det kan göras.
+*   **Vid Game Over:** När någon av spelarna krockar med Tetrishinder eller gråa väggen förlorar denna spelare och vinnaren är motståndaren.
+*   **Vid mållinjen:** Vinnare är den spelare som når och träffar mållinjen först.
+*   **Poäng:** Poängen som samlats in per sekund och ökats genom infångade stjärnor visas upp på Game Over / Winner-skärmarna, och syftet med dessa poäng är inte att utse en vinnare utan för att kunna ha rekord för sig själv och sin motspelare.
 
-Eftersom det här projektet är konfigurerat till att fungera utan `import/export` så det ibland vara så att typescript kompilatorn inte hittar en klass. För att lösa det kan du lägga till en referens kommentar som berättar för typescript vart klassen är deklarerad.
+### Power-Ups och faror
 
-Lägg till följande `/// <reference path="to-file-with-class" />` längst upp i filen som genererade felet och skriv korrekt sökväg.
+*   **Faror:**
+    *   **TetrisBlock:** Effekt: Game Over
+    *   **Wall:** Effekt: Game Over
+    *   **Ghost:** Effekt: -1 hjärta (om du är på spöket), -5 poäng (om du är i närheten av spöket)
+    *   **Plant:** Effekt: -2 hjärtan
 
-## TODO
+*   **Power-Ups:**
+    *   **Stjärna:** Effekt: 2x poäng (under 10 sekunder)
+    *   **Hjärta:** Effekt: +1 liv
 
-Lägg till ytterligare information som är specifikt för ert projekt!
+### Strategi
 
-**LYCKA TILL!**
+*   **Resurshantering:** Balansera risken att samla power-ups mot att förlora liv.
+*   **Positionering:** Planera din rutt för att undvika spöket medan du jagar power-ups.
+*   **Timing:** Beräkna när det är värt att ta skada för att nå bättre position eller få extra poäng.
